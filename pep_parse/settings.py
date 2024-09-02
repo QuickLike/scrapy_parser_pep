@@ -1,6 +1,6 @@
 import os
-from datetime import datetime
 from pathlib import Path
+
 
 OT_NAME = 'pep_parse'
 
@@ -27,7 +27,3 @@ ITEM_PIPELINES = {
 }
 
 os.makedirs(BASE_DIR, exist_ok=True)
-
-now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-FILENAME = f'status_summary_{now}.csv'
-FILEPATH = BASE_DIR / FILENAME
