@@ -16,11 +16,17 @@ git clone https://github.com/QuickLike/scrapy_parser_pep
 
 cd scrapy_parser_pep
 ```
-Создайте виртуальное окружение и активируйте его:
+Создайте виртуальное окружение и активируйте его
+Windows
 ```
-python -m venv vevn
+python -m venv venv
+venv/Scripts/activate
+```
 
-source venv/Scripts/activate
+Linux/Ubuntu/MacOS
+```
+python3 -m venv venv
+source venv/bin/activate
 ```
 Обновите pip:
 ```
