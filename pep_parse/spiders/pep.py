@@ -9,10 +9,9 @@ class PepSpider(scrapy.Spider):
     start_urls = [f'https://{domain}/' for domain in allowed_domains]
 
     def parse(self, response):
-        hrefs = response.css(
-            '#numerical-index'
-        ).css('tbody').css('tr').css('a::attr(href)').getall()
-        for href in hrefs:
+        for href in response.css(
+                '#numerical-index table tbody tr a::attr(href)'
+        ).getall():
             yield response.follow(href, callback=self.parse_pep)
 
     def parse_pep(self, pep):

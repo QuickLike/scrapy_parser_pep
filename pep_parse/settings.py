@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 
@@ -26,4 +25,4 @@ ITEM_PIPELINES = {
     'pep_parse.pipelines.PepParsePipeline': 100,
 }
 
-os.makedirs(BASE_DIR, exist_ok=True)
+DATE_FORMAT = '%Y-%m-%d_%H-%M-%S'

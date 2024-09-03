@@ -2,7 +2,7 @@ import csv
 from collections import defaultdict
 from datetime import datetime
 
-from pep_parse.settings import BASE_DIR
+from pep_parse.settings import BASE_DIR, DATE_FORMAT
 
 
 class PepParsePipeline:
@@ -14,17 +14,20 @@ class PepParsePipeline:
         return item
 
     def close_spider(self, spider):
-        now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-        filename = f'status_summary_{now}.csv'
+        filename = (
+            f'status_summary_{datetime.now().strftime(DATE_FORMAT)}.csv'
+        )
         filepath = BASE_DIR / filename
         with open(filepath, 'w') as csvfile:
-            writer = csv.writer(csvfile)
+            writer = csv.writer(
+                csvfile,
+                dialect='excel',
+                quoting=csv.QUOTE_NONE
+            )
             writer.writerows(
-                [
-                    ['Статус', 'Количество']
-                ] + [
-                    [status, count]
-                    for status, count in self.status_counts.items()
-                ] + [
-                    ['Всего', len(self.status_counts)]]
+                (
+                    ('Статус', 'Количество'),
+                    *self.status_counts.items(),
+                    ('Всего', sum(self.status_counts.values()))
+                )
             )
