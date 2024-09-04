@@ -10,7 +10,7 @@ class PepSpider(scrapy.Spider):
 
     def parse(self, response):
         for href in response.css(
-                '#numerical-index table tbody tr a::attr(href)'
+            '#numerical-index table tbody tr a::attr(href)'
         ).getall():
             yield response.follow(href, callback=self.parse_pep)
 

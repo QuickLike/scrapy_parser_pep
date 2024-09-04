@@ -2,7 +2,7 @@ import csv
 from collections import defaultdict
 from datetime import datetime
 
-from pep_parse.settings import BASE_DIR, DATE_FORMAT
+from pep_parse.settings import BASE_DIR, DATE_FORMAT, SAVE_PATH
 
 
 class PepParsePipeline:
@@ -17,17 +17,15 @@ class PepParsePipeline:
         filename = (
             f'status_summary_{datetime.now().strftime(DATE_FORMAT)}.csv'
         )
-        filepath = BASE_DIR / filename
+        filepath = BASE_DIR / SAVE_PATH / filename
         with open(filepath, 'w') as csvfile:
             writer = csv.writer(
                 csvfile,
-                dialect='excel',
+                dialect=csv.excel,
                 quoting=csv.QUOTE_NONE
             )
-            writer.writerows(
-                (
-                    ('Статус', 'Количество'),
-                    *self.status_counts.items(),
-                    ('Всего', sum(self.status_counts.values()))
-                )
-            )
+            writer.writerows((
+                ('Статус', 'Количество'),
+                *self.status_counts.items(),
+                ('Всего', sum(self.status_counts.values()))
+            ))

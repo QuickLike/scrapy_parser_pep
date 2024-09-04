@@ -5,7 +5,7 @@ OT_NAME = 'pep_parse'
 
 SAVE_PATH = 'results'
 
-BASE_DIR = Path(__file__).resolve().parent.parent / SAVE_PATH
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 NEWSPIDER_MODULE = 'pep_parse.spiders'
 SPIDER_MODULES = [NEWSPIDER_MODULE]
