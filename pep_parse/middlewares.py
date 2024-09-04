@@ -98,5 +98,3 @@ class PepParseDownloaderMiddleware:
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
         os.makedirs(BASE_DIR / SAVE_PATH, exist_ok=True)
-
-
