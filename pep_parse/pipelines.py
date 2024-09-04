@@ -1,4 +1,5 @@
 import csv
+import os
 from collections import defaultdict
 from datetime import datetime
 
@@ -8,6 +9,7 @@ from pep_parse.settings import BASE_DIR, DATE_FORMAT, SAVE_PATH
 class PepParsePipeline:
     def open_spider(self, spider):
         self.status_counts = defaultdict(int)
+        os.makedirs(BASE_DIR / SAVE_PATH, exist_ok=True)
 
     def process_item(self, item, spider):
         self.status_counts[item['status']] += 1
